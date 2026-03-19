@@ -10,6 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <style>
+        /* Modern CSS Tokens (Strict Format Locking) */
+        :root {
+            --color-primary: #2563eb;
+            --color-text-main: #0f172a;
+            --color-text-muted: #64748b;
+            --color-surface: #ffffff;
+            --color-background: #f8fafc;
+            --color-danger: #ef4444;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,6 +32,8 @@
                         'primary-green': '#3cb371',
                         'dark-green': '#2e8b57',
                         'action-orange': '#ff4500',
+                        'form-label-bg': '#e2eff9',
+                        'form-input-bg': '#faf9f4',
                     }
                 }
             }
@@ -28,7 +43,7 @@
 <body class="bg-white text-[#333] leading-[1.8] font-['Noto_Sans_JP',_sans-serif]">
 
     <main>
-        <section class="relative pt-16 pb-56 px-5 flex flex-col items-center overflow-hidden bg-[linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.6)),url('main.jpg')] bg-cover bg-center js-fade-in opacity-0 translate-y-5 transition-all duration-700 ease-out">
+        <section class="relative pt-16 pb-56 px-5 flex flex-col items-center overflow-hidden bg-[linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.6)),url('main.webp')] bg-cover bg-center js-fade-in opacity-0 translate-y-5 transition-all duration-700 ease-out">
             <div class="flex items-center border border-gray-300 rounded-full px-4 py-1 bg-white mb-5 text-xs font-medium text-gray-600">
                 <span class="font-bold text-gray-800 mr-2">障害福祉施設 特化型</span>
                 <span class="bg-red-100 text-red-600 px-2 rounded-full text-[10px]">最新法令対応</span>
@@ -100,7 +115,7 @@
                     <h2 class="text-3xl font-black leading-tight mb-6">
                         「その重要事項説明、<br>実地指導で指摘されませんか？」
                     </h2>
-                    <img src="sub.jpg" alt="悩む施設管理者のイラスト" class="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg" loading="lazy">
+                    <img src="sub.webp" alt="悩む施設管理者のイラスト" class="w-full h-auto aspect-[4/3] object-cover rounded-lg shadow-lg" loading="lazy">
                 </div>
                 <div class="md:w-1/2">
                     <ul class="space-y-4">
@@ -169,45 +184,134 @@
         </section>
 
         <section id="form" class="py-20 bg-gray-50 px-5">
-            <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100">
-                <h2 class="text-2xl font-black text-center mb-8">お申込み・お問い合わせ</h2>
+            <div class="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-lg border border-gray-100">
+                <h2 class="text-2xl font-black text-center mb-10">お申込み・お問い合わせ</h2>
                 
-                <form action="#" method="POST" class="h-adr block space-y-6">
-                    <span class="p-country-name hidden">Japan</span>
+                <form id="contactForm" action="https://76auto.biz/nfja/responder.php" method="POST" enctype="multipart/form-data" class="w-full text-sm text-gray-700 border-t border-l border-r border-white">
+                    <input type="hidden" name="mcode" value="UTF-8">
+                    <input type="hidden" name="tno" value="63">
+                    <input type="hidden" name="spflg" value="1">
+                    <input type="hidden" name="rgst" value="entry">
                     
-                    <div>
-                        <label class="block text-sm font-bold mb-2">法人・事業所名 <span class="bg-red-500 text-white text-[10px] px-2 py-1 rounded ml-2">必須</span></label>
-                        <input type="text" name="company" required placeholder="株式会社〇〇 就労継続支援B型〇〇" class="w-full border-2 border-gray-200 p-3 rounded-lg focus:border-primary-green outline-none transition-colors">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold mb-2">お名前 <span class="bg-red-500 text-white text-[10px] px-2 py-1 rounded ml-2">必須</span></label>
-                        <input type="text" name="name" required placeholder="山田 太郎" class="w-full border-2 border-gray-200 p-3 rounded-lg focus:border-primary-green outline-none transition-colors">
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-bold mb-2">メールアドレス <span class="bg-red-500 text-white text-[10px] px-2 py-1 rounded ml-2">必須</span></label>
-                            <input type="email" name="email" autocomplete="email" required placeholder="example@mail.com" class="w-full border-2 border-gray-200 p-3 rounded-lg focus:border-primary-green outline-none transition-colors">
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            お名前 <span class="text-red-600 font-bold ml-2">*</span>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold mb-2">電話番号 <span class="bg-red-500 text-white text-[10px] px-2 py-1 rounded ml-2">必須</span></label>
-                            <input type="tel" name="tel" autocomplete="tel" required placeholder="03-1234-5678" class="w-full border-2 border-gray-200 p-3 rounded-lg focus:border-primary-green outline-none transition-colors">
+                        <div class="bg-form-input-bg md:w-[70%] p-4 flex flex-col md:flex-row md:items-center gap-3">
+                            <input type="text" name="name1" required class="border border-gray-300 px-3 py-2 w-full max-w-[280px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600">
+                            <span class="text-gray-500">EX：山田 太郎</span>
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-bold mb-2">ご希望・ご相談内容</label>
-                        <textarea name="message" rows="4" placeholder="実地指導を控えている、現在の説明資料が古いなど" class="w-full border-2 border-gray-200 p-3 rounded-lg focus:border-primary-green outline-none transition-colors"></textarea>
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            メールアドレス <span class="text-red-600 font-bold ml-2">*</span>
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4 flex flex-col md:flex-row md:items-center gap-3">
+                            <input type="email" name="email" required autocomplete="email" class="border border-gray-300 px-3 py-2 w-full max-w-[280px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600">
+                            <span class="text-gray-500 text-xs md:text-sm leading-snug">
+                                ※ご案内はこちらのアドレス宛にお送りいたします。<br>入力間違いにご注意ください。
+                            </span>
+                        </div>
                     </div>
 
-                    <div class="text-xs text-gray-500 text-center">
-                        <p>送信前に <a href="#privacy" class="underline text-primary-green">プライバシーポリシー</a> に同意したものとみなします。</p>
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            電話番号 <span class="text-red-600 font-bold ml-2">*</span>
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <input type="text" name="fld2" required class="border border-gray-300 px-3 py-2 w-full max-w-[280px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600">
+                        </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-action-orange text-white py-5 rounded-xl font-black text-xl hover:brightness-110 transition-all shadow-lg">
-                        この内容で送信して先行予約する
-                    </button>
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            利用規約の確認
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4 flex flex-col md:flex-row md:items-center gap-4">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" name="fld14[]" value="利用規約を確認しました" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
+                                <span>利用規約を確認しました</span>
+                            </label>
+                            <span class="text-gray-500 text-xs md:text-sm">
+                                規約はこのページ上部にもございます。
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            お申込み事業所数
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <select name="fld13" class="border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 cursor-pointer">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            事業所名１ <span class="text-red-600 font-bold ml-2">*</span>
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <input type="text" name="fld1" required class="border border-gray-300 px-3 py-2 w-full max-w-[280px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            事業所種別１ <span class="text-red-600 font-bold ml-2">*</span>
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <select name="fld3" required class="border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 cursor-pointer">
+                                <option value="就労継続支援A型">就労継続支援A型</option>
+                                <option value="就労継続支援B型">就労継続支援B型</option>
+                                <option value="グループホーム">グループホーム</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            事業所名２
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <input type="text" name="fld6" class="border border-gray-300 px-3 py-2 w-full max-w-[280px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-center font-medium">
+                            事業所種別２
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <select name="fld7" class="border border-gray-300 px-3 py-2 bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 cursor-pointer">
+                                <option value="">選択してください</option>
+                                <option value="就労継続支援A型">就労継続支援A型</option>
+                                <option value="就労継続支援B型">就労継続支援B型</option>
+                                <option value="グループホーム">グループホーム</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row border-b border-white">
+                        <div class="bg-form-label-bg md:w-[30%] p-4 flex items-start pt-6 font-medium">
+                            備考
+                        </div>
+                        <div class="bg-form-input-bg md:w-[70%] p-4">
+                            <textarea name="fld11" rows="5" class="border border-gray-300 px-3 py-2 w-full max-w-[500px] focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 resize-y"></textarea>
+                            <p class="text-gray-500 text-xs mt-2">ご質問、ご連絡事項にお使いください。</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 max-w-sm mx-auto">
+                        <button type="submit" name="sbm" id="submitBtn" class="w-full bg-action-orange text-white py-4 rounded-xl font-black text-lg hover:brightness-110 transition-all shadow-lg flex items-center justify-center">
+                            お申込みに進む
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
@@ -274,21 +378,56 @@
     }
     </script>
 
-    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
     <script>
+        // ==========================================
+        // Resilience & UX Utility Patterns (Vanilla JS)
+        // ==========================================
+
+        // 1. Global Error & Promise Rejection Handler
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error(`Global Error: ${message} at line ${lineno}`);
+        };
+
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled Promise Rejection:', event.reason);
+        });
+
+        // 2. Safe Storage Wrapper (Safari Private Mode Crash対策)
+        const safeStorage = {
+            setItem: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                    return true;
+                } catch (e) {
+                    console.warn('LocalStorage write failed. Falling back to memory.', e);
+                    return false;
+                }
+            },
+            getItem: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    console.error('LocalStorage read failed.', e);
+                    return null;
+                }
+            }
+        };
+
         document.addEventListener("DOMContentLoaded", function() {
+            // ==========================================
+            // Existing Logic (Regression Prevent)
+            // ==========================================
+            
             // Intersection Observer for fade-in effect
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Tailwindによる装飾制御へ切り替え
                         entry.target.classList.remove('opacity-0', 'translate-y-5');
                         entry.target.classList.add('opacity-100', 'translate-y-0');
                     }
                 });
             }, { threshold: 0.1 });
 
-            // フック用プレフィックス「js-」を使用した要素取得
             document.querySelectorAll('.js-fade-in').forEach((el) => observer.observe(el));
 
             // Smooth scroll
@@ -300,6 +439,35 @@
                     });
                 });
             });
+
+            // ==========================================
+            // Form Interaction (AutoBiz連携 & 二重送信防止)
+            // ==========================================
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (contactForm && submitBtn) {
+                contactForm.addEventListener('submit', function(e) {
+                    // 二重送信防止のチェック
+                    if (contactForm.dataset.submitting === 'true') {
+                        e.preventDefault();
+                        return;
+                    }
+                    contactForm.dataset.submitting = 'true';
+
+                    // 1. 同期的なImmediate Disable (見た目のみ更新)
+                    // 注: ブラウザによっては disabled 属性を付けるとPOST送信自体がキャンセルされるため、
+                    // スタイルと pointer-events でクリックを防ぐ安全なアプローチをとります。
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>送信中...';
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    submitBtn.style.pointerEvents = 'none';
+
+                    // 2. 状態の記録 (任意)
+                    safeStorage.setItem('form_submitted', 'true');
+
+                    // e.preventDefault() は実行せず、そのままオートビズへPOST遷移させます
+                });
+            }
         });
     </script>
 </body>

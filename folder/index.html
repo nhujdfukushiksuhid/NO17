@@ -234,7 +234,7 @@
                                 <span>利用規約を確認しました</span>
                             </label>
                             <span class="text-gray-500 text-xs md:text-sm">
-                                規約はこのページ上部にもございます。
+                                規約はページ最下部のリンクからもご確認いただけます。
                             </span>
                         </div>
                     </div>
@@ -317,43 +317,24 @@
         </section>
     </main>
 
-    <footer class="bg-gray-900 text-white py-16 px-5">
-        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-                <h3 class="text-xl font-bold mb-6">特定商取引法に基づく表記</h3>
-                <table class="w-full text-xs text-gray-400">
-                    <tr class="border-b border-gray-800">
-                        <th class="text-left py-2 w-1/3">販売事業者名</th>
-                        <td class="py-2">一般社団法人 日本福祉事業者協会</td>
-                    </tr>
-                    <tr class="border-b border-gray-800">
-                        <th class="text-left py-2">運営責任者</th>
-                        <td class="py-2">奈良有樹</td>
-                    </tr>
-                    <tr class="border-b border-gray-800">
-                        <th class="text-left py-2">所在地</th>
-                        <td class="py-2">〒107-0052　東京都港区赤坂四丁目8番19号 赤坂フロントタウン3階</td>
-                    </tr>
-                    <tr class="border-b border-gray-800">
-                        <th class="text-left py-2">お支払い方法</th>
-                        <td class="py-2">銀行振込 / クレジットカード</td>
-                    </tr>
-                    <tr class="border-b border-gray-800">
-                        <th class="text-left py-2">商品代金以外の費用</th>
-                        <td class="py-2">振込手数料</td>
-                    </tr>
-                </table>
+    <footer class="bg-gray-900 text-white pt-16 pb-24 md:pb-12 px-5">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center md:items-end gap-6">
+            
+            <div class="text-center md:text-left">
+                <div class="text-2xl font-black opacity-30 mb-2 italic tracking-wider">SERVICEDOT</div>
+                <p class="text-[11px] text-gray-500">&copy; 2024 重要事項説明動画制作サービス. All rights reserved.</p>
             </div>
-            <div>
-                <h3 class="text-xl font-bold mb-6">プライバシーポリシー</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    当サービスは、お客様の個人情報を適切に管理し、本サービスの提供・改善およびご連絡以外の目的で使用いたしません。法令に基づく開示要請がある場合を除き、第三者への提供は行いません。
-                </p>
-                <div class="mt-8 pt-8 border-t border-gray-800 text-center md:text-left">
-                    <div class="text-2xl font-black opacity-50 mb-2 italic">SERVICEDOT</div>
-                    <p class="text-[10px] text-gray-600">&copy; 2024 重要事項説明動画制作サービス. All rights reserved.</p>
-                </div>
+
+            <div class="flex gap-4 text-[10px] text-gray-600">
+                <a href="https://fukushi-jigyousya.com/law/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 transition-colors duration-200">
+                    特定商取引法に基づく表記
+                </a>
+                <span>|</span>
+                <a href="https://fukushi-jigyousya.com/privacy-policy/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-400 transition-colors duration-200">
+                    プライバシーポリシー
+                </a>
             </div>
+
         </div>
     </footer>
 
@@ -383,7 +364,6 @@
         // Resilience & UX Utility Patterns (Vanilla JS)
         // ==========================================
 
-        // 1. Global Error & Promise Rejection Handler
         window.onerror = function(message, source, lineno, colno, error) {
             console.error(`Global Error: ${message} at line ${lineno}`);
         };
@@ -392,7 +372,6 @@
             console.error('Unhandled Promise Rejection:', event.reason);
         });
 
-        // 2. Safe Storage Wrapper (Safari Private Mode Crash対策)
         const safeStorage = {
             setItem: (key, value) => {
                 try {
@@ -414,11 +393,7 @@
         };
 
         document.addEventListener("DOMContentLoaded", function() {
-            // ==========================================
-            // Existing Logic (Regression Prevent)
-            // ==========================================
-            
-            // Intersection Observer for fade-in effect
+            // Fade-in animation
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -440,32 +415,23 @@
                 });
             });
 
-            // ==========================================
             // Form Interaction (AutoBiz連携 & 二重送信防止)
-            // ==========================================
             const contactForm = document.getElementById('contactForm');
             const submitBtn = document.getElementById('submitBtn');
 
             if (contactForm && submitBtn) {
                 contactForm.addEventListener('submit', function(e) {
-                    // 二重送信防止のチェック
                     if (contactForm.dataset.submitting === 'true') {
                         e.preventDefault();
                         return;
                     }
                     contactForm.dataset.submitting = 'true';
 
-                    // 1. 同期的なImmediate Disable (見た目のみ更新)
-                    // 注: ブラウザによっては disabled 属性を付けるとPOST送信自体がキャンセルされるため、
-                    // スタイルと pointer-events でクリックを防ぐ安全なアプローチをとります。
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>送信中...';
                     submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
                     submitBtn.style.pointerEvents = 'none';
 
-                    // 2. 状態の記録 (任意)
                     safeStorage.setItem('form_submitted', 'true');
-
-                    // e.preventDefault() は実行せず、そのままオートビズへPOST遷移させます
                 });
             }
         });

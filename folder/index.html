@@ -194,7 +194,7 @@
                 <div class="text-center mb-8 pb-6 border-b border-gray-200">
                     <h2 class="text-2xl md:text-3xl font-black text-gray-800 mb-3">お申込み・ご相談フォーム</h2>
                     <p class="text-gray-600 text-sm md:text-base leading-relaxed">
-                        先行価格での<span class="font-bold text-red-600">お申込み</span>はもちろん、<span class="font-bold text-primary-green">「まずは資料が見たい」「自社のケースについて相談したい」</span>という方も、<br>こちらのお申込みフォームからお気軽にご連絡ください。<br>
+                        先行価格での<span class="font-bold text-red-600">お申込み</span>はもちろん、<span class="font-bold text-primary-green">「詳しい話を聞きたい」「自社のケースについて相談したい」</span>という方も、<br>こちらのフォームからお気軽にご連絡ください。<br>
                         （※ご送信いただいた内容に合わせて、担当者より適切なご案内をさせていただきます）
                     </p>
                 </div>
@@ -258,28 +258,26 @@
                                 <option value="障害者共同生活援助">障害者共同生活援助</option>
                                 <option value="就労継続支援A型">就労継続支援A型</option>
                                 <option value="就労継続支援B型">就労継続支援B型</option>
+                                <option value="就労移行支援">就労移行支援</option>
+                                <option value="生活介護">生活介護</option>
                                 <option value="グループホーム">グループホーム</option>
+                                <option value="その他">その他</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="flex flex-col md:flex-row border-b border-white">
                         <div class="bg-form-label-bg md:w-[30%] p-4 flex flex-col justify-center font-medium">
-                            <span>ご希望をお知らせくださ</span>
-                            <span>い <span class="text-red-600 font-bold">*</span></span>
+                            <span>ご希望をお知らせください <span class="text-red-600 font-bold">*</span></span>
                         </div>
                         <div class="bg-form-input-bg md:w-[70%] p-4 flex flex-col gap-2">
                             <label class="flex items-center cursor-pointer w-max">
-                                <input type="radio" name="fld16" value="資料請求" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
-                                <span>資料請求</span>
+                                <input type="radio" name="fld16" value="お問い合わせ" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
+                                <span>お問い合わせ</span>
                             </label>
                             <label class="flex items-center cursor-pointer w-max">
-                                <input type="radio" name="fld16" value="お問い合わせ（割引適用）" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
-                                <span>お問い合わせ（割引適用）</span>
-                            </label>
-                            <label class="flex items-center cursor-pointer w-max">
-                                <input type="radio" name="fld16" value="お申込み（割引適用）" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
-                                <span>お申込み（割引適用）</span>
+                                <input type="radio" name="fld16" value="お申込み" required class="w-4 h-4 mr-2 accent-blue-600 cursor-pointer">
+                                <span>お申込み</span>
                             </label>
                         </div>
                     </div>
@@ -295,8 +293,10 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
                             </select>
-                            <span class="text-gray-500 text-xs md:text-sm">※お申込みをご検討中の方</span>
+                            <span class="text-gray-500 text-xs md:text-sm">※お申込みをご希望の方</span>
                         </div>
                     </div>
 
@@ -310,7 +310,7 @@
                                 <span>利用規約を確認しました</span>
                             </label>
                             <span class="text-gray-500 text-xs md:text-sm leading-snug">
-                                規約はこちらのページ上部にもございます。
+                                ※お申込みをご希望の方
                             </span>
                         </div>
                     </div>
@@ -325,10 +325,13 @@
                         </div>
                     </div>
 
-                    <div class="mt-10 flex justify-center">
-                        <button type="submit" name="sbm" id="submitBtn" class="bg-btn-blue text-white py-3 px-16 rounded shadow hover:brightness-110 transition-all font-bold tracking-wider">
+                    <div class="mt-10 flex flex-col items-center">
+                        <button type="submit" name="sbm" id="submitBtn" class="bg-btn-blue text-white py-3 px-16 rounded shadow hover:brightness-110 transition-all font-bold tracking-wider mb-4">
                             確認に進む
                         </button>
+                        <a href="https://fukushi-jigyousya.com/wp-content/uploads/2026/03/kiyaku_dogadx2603.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline text-sm font-medium">
+                            利用規約はこちら
+                        </a>
                     </div>
                 </form>
             </div>
